@@ -1,35 +1,24 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AgentProvider } from "@wisp/react"
-import { Nav } from "@/components/landing/Nav"
-import { Hero } from "@/components/landing/Hero"
-import { Features } from "@/components/landing/Features"
-import { LiveDemo } from "@/components/landing/LiveDemo"
-import { Quickstart } from "@/components/landing/Quickstart"
-import { WhyWisp } from "@/components/landing/WhyWisp"
-import { Comparison } from "@/components/landing/Comparison"
-import { Faq } from "@/components/landing/Faq"
-import { Footer } from "@/components/landing/Footer"
-import { DemoBubbleProvider } from "@/components/landing/DemoBubble"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { Toaster } from "@/components/ui/sonner"
+import { LandingPage } from "@/pages/LandingPage"
+import { ChangelogPage } from "@/pages/ChangelogPage"
 import { mockAgentFetch } from "@/demo/mock-fetch"
 
 export function App() {
   return (
-    <AgentProvider endpoint="/api/agent" fetch={mockAgentFetch}>
-      <DemoBubbleProvider>
-        <div id="top" className="relative">
-          <Nav />
-          <main>
-            <Hero />
-            <Features />
-            <LiveDemo />
-            <Quickstart />
-            <WhyWisp />
-            <Comparison />
-            <Faq />
-          </main>
-          <Footer />
-        </div>
-      </DemoBubbleProvider>
-    </AgentProvider>
+    <BrowserRouter>
+      <AgentProvider endpoint="/api/agent" fetch={mockAgentFetch}>
+        <TooltipProvider delayDuration={150}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/changelog" element={<ChangelogPage />} />
+          </Routes>
+          <Toaster position="bottom-right" richColors closeButton />
+        </TooltipProvider>
+      </AgentProvider>
+    </BrowserRouter>
   )
 }
 

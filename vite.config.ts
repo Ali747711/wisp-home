@@ -35,7 +35,7 @@ export default defineConfig({
       "lucide-react": path.resolve(websiteModules, "lucide-react"),
       "zustand/vanilla": path.resolve(
         websiteModules,
-        "zustand/vanilla.mjs"
+        "zustand/esm/vanilla.mjs"
       ),
       "zod-to-json-schema": path.resolve(
         websiteModules,

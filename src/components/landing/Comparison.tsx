@@ -1,7 +1,25 @@
 import { HugeiconsIcon } from "@hugeicons/react"
-import { Tick02Icon, Cancel01Icon } from "@hugeicons/core-free-icons"
+import {
+  Tick02Icon,
+  Cancel01Icon,
+  InformationCircleIcon,
+} from "@hugeicons/core-free-icons"
 import { SectionHeader } from "./SectionHeader"
 import { Reveal } from "./Reveal"
+import { Badge } from "@/components/ui/badge"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 
 type Cell =
@@ -12,6 +30,7 @@ type Cell =
 
 type Row = {
   feature: string
+  why: string
   wisp: Cell
   copilotKit: Cell
   assistantUi: Cell
@@ -21,6 +40,7 @@ type Row = {
 const ROWS: Row[] = [
   {
     feature: "Type-safe commands (Zod → JSON Schema)",
+    why: "Catches bad LLM arguments at runtime and gives you full TS inference inside handlers.",
     wisp: { kind: "yes" },
     copilotKit: { kind: "partial", note: "useCopilotAction + Zod" },
     assistantUi: { kind: "no", note: "UI only" },
@@ -28,6 +48,7 @@ const ROWS: Row[] = [
   },
   {
     feature: "Hand-rolled streaming (no Vercel AI SDK dep)",
+    why: "Keeps the dep tree small and means SSE behaviour is debuggable end-to-end.",
     wisp: { kind: "yes" },
     copilotKit: { kind: "no" },
     assistantUi: { kind: "no" },
@@ -35,6 +56,7 @@ const ROWS: Row[] = [
   },
   {
     feature: "OpenAI + Anthropic, one interface",
+    why: "Switch providers in one config line — same streaming + tool-calling shape.",
     wisp: { kind: "yes" },
     copilotKit: { kind: "yes" },
     assistantUi: { kind: "partial", note: "via your adapter" },
@@ -42,6 +64,7 @@ const ROWS: Row[] = [
   },
   {
     feature: "Theme via CSS variables (no Tailwind required)",
+    why: "Drop-in for any React app. Your users don't inherit our build system.",
     wisp: { kind: "yes" },
     copilotKit: { kind: "partial", note: "CSS-in-JS" },
     assistantUi: { kind: "yes" },
@@ -49,6 +72,7 @@ const ROWS: Row[] = [
   },
   {
     feature: "Steps to ship",
+    why: "Files you'll touch from `npm install` to a working agent in your app.",
     wisp: { kind: "text", note: "3 files" },
     copilotKit: { kind: "text", note: "5+ files" },
     assistantUi: { kind: "text", note: "8+ files" },
@@ -56,6 +80,7 @@ const ROWS: Row[] = [
   },
   {
     feature: "Bundle size (react package)",
+    why: "Includes the provider, hooks, and default UI. Measured with rollup-plugin-visualizer.",
     wisp: { kind: "text", note: "~12 kB gz" },
     copilotKit: { kind: "text", note: "~85 kB gz" },
     assistantUi: { kind: "text", note: "~40 kB gz" },
@@ -73,7 +98,7 @@ const COLUMNS = [
 export function Comparison() {
   return (
     <section id="comparison" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <SectionHeader
             eyebrow="Compared"
@@ -89,68 +114,96 @@ export function Comparison() {
 
         <Reveal delay={120}>
           <div className="border-border/70 bg-card/40 ring-primary-soft/30 mt-14 overflow-hidden rounded-2xl border">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-border/60 bg-muted/30 border-b">
-                    <th
+            <Table className="text-sm">
+              <TableHeader>
+                <TableRow className="border-border/60 bg-muted/30 hover:bg-muted/30">
+                  <TableHead
+                    scope="col"
+                    className="text-muted-foreground sticky left-0 z-10 bg-muted/30 px-5 py-4 text-left text-xs font-medium uppercase tracking-wider min-w-[260px]"
+                  >
+                    Feature
+                  </TableHead>
+                  {COLUMNS.map((col) => (
+                    <TableHead
+                      key={col.key}
                       scope="col"
-                      className="text-muted-foreground px-5 py-4 text-left text-xs font-medium uppercase tracking-wider"
-                    >
-                      Feature
-                    </th>
-                    {COLUMNS.map((col) => (
-                      <th
-                        key={col.key}
-                        scope="col"
-                        className={cn(
-                          "px-5 py-4 text-left text-xs font-semibold tracking-wider uppercase",
-                          col.highlight
-                            ? "text-primary"
-                            : "text-muted-foreground"
-                        )}
-                      >
-                        {col.label}
-                        {col.highlight && (
-                          <span className="bg-primary/15 text-primary ml-2 inline-flex items-center rounded-full px-1.5 py-0.5 text-[9px] font-medium tracking-widest uppercase">
-                            this site
-                          </span>
-                        )}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {ROWS.map((row, idx) => (
-                    <tr
-                      key={row.feature}
                       className={cn(
-                        "border-border/40 border-b last:border-0",
-                        idx % 2 === 1 && "bg-muted/15"
+                        "px-5 py-4 text-left text-xs font-semibold tracking-wider uppercase",
+                        col.highlight ? "text-primary" : "text-muted-foreground"
                       )}
                     >
-                      <th
-                        scope="row"
-                        className="text-foreground/85 px-5 py-4 text-left text-sm font-medium"
-                      >
-                        {row.feature}
-                      </th>
-                      {COLUMNS.map((col) => (
-                        <td
-                          key={col.key}
-                          className={cn(
-                            "px-5 py-4 align-top",
-                            col.highlight && "bg-primary/5"
-                          )}
-                        >
-                          <CellView cell={row[col.key]} highlighted={col.highlight} />
-                        </td>
-                      ))}
-                    </tr>
+                      <span className="inline-flex items-center gap-2">
+                        {col.label}
+                        {col.highlight && (
+                          <Badge
+                            variant="secondary"
+                            className="bg-primary/15 text-primary rounded-full px-1.5 py-0 text-[9px] tracking-widest uppercase"
+                          >
+                            this site
+                          </Badge>
+                        )}
+                      </span>
+                    </TableHead>
                   ))}
-                </tbody>
-              </table>
-            </div>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {ROWS.map((row, idx) => (
+                  <TableRow
+                    key={row.feature}
+                    className={cn(
+                      "border-border/40 hover:bg-muted/20",
+                      idx % 2 === 1 && "bg-muted/15"
+                    )}
+                  >
+                    <TableCell
+                      scope="row"
+                      className={cn(
+                        "text-foreground/85 sticky left-0 px-5 py-4 text-left text-sm font-medium whitespace-normal min-w-[260px]",
+                        idx % 2 === 1 ? "bg-muted/15" : "bg-background"
+                      )}
+                    >
+                      <span className="inline-flex items-center gap-1.5">
+                        {row.feature}
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button
+                              type="button"
+                              aria-label={`Why ${row.feature}`}
+                              className="text-muted-foreground/50 hover:text-foreground transition-colors"
+                            >
+                              <HugeiconsIcon
+                                icon={InformationCircleIcon}
+                                size={13}
+                                strokeWidth={2}
+                              />
+                            </button>
+                          </TooltipTrigger>
+                          <TooltipContent
+                            side="top"
+                            sideOffset={6}
+                            className="max-w-[260px] text-xs leading-snug"
+                          >
+                            {row.why}
+                          </TooltipContent>
+                        </Tooltip>
+                      </span>
+                    </TableCell>
+                    {COLUMNS.map((col) => (
+                      <TableCell
+                        key={col.key}
+                        className={cn(
+                          "px-5 py-4 align-middle whitespace-normal",
+                          col.highlight && "bg-primary/5"
+                        )}
+                      >
+                        <CellView cell={row[col.key]} highlighted={col.highlight} />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         </Reveal>
       </div>
@@ -165,7 +218,9 @@ function CellView({ cell, highlighted }: { cell: Cell; highlighted: boolean }) {
         <span
           className={cn(
             "inline-flex size-5 items-center justify-center rounded-full",
-            highlighted ? "bg-primary text-primary-foreground" : "bg-primary/15 text-primary"
+            highlighted
+              ? "bg-primary text-primary-foreground"
+              : "bg-primary/15 text-primary"
           )}
         >
           <HugeiconsIcon icon={Tick02Icon} size={12} strokeWidth={3} />
@@ -198,5 +253,9 @@ function CellView({ cell, highlighted }: { cell: Cell; highlighted: boolean }) {
       </span>
     )
   }
-  return <span className="text-foreground/80 text-xs font-medium">{cell.note}</span>
+  return (
+    <span className="text-foreground/85 font-mono-tabular text-xs font-medium">
+      {cell.note}
+    </span>
+  )
 }
