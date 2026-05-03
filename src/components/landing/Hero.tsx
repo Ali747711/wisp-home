@@ -3,7 +3,6 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import {
   ArrowRight01Icon,
   GithubIcon,
-  StarsIcon,
   Tick02Icon,
 } from "@hugeicons/core-free-icons"
 import { Button } from "@/components/ui/button"
@@ -99,7 +98,7 @@ export function Hero() {
                 variant="secondary"
                 className="mb-6 gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-primary-foreground backdrop-blur dark:text-primary"
               >
-                <HugeiconsIcon icon={StarsIcon} size={14} strokeWidth={2} />
+                <HugeiconsIcon icon={Tick02Icon} size={14} strokeWidth={2} />
                 <span className="font-mono-tabular tracking-wider uppercase">
                   v0.1.0 · Now in beta
                 </span>

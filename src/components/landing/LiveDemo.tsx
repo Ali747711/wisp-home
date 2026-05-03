@@ -3,7 +3,6 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import {
   ArrowRight01Icon,
   SparklesIcon,
-  StarsIcon,
   Tick02Icon,
   Search01Icon,
   ShoppingBag01Icon,
@@ -73,7 +72,7 @@ const SCENARIOS: Scenario[] = [
       {
         label: "Summarize my open PRs",
         prompt: "Summarize my open pull requests",
-        icon: StarsIcon,
+        icon: Search01Icon,
         tool: "no tool",
         tooltip:
           "Free-form prompt — no tool fires. The agent answers directly from app context.",
@@ -110,7 +109,7 @@ const SCENARIOS: Scenario[] = [
       {
         label: "Recommend a gift under $40",
         prompt: "Recommend a gift under $40",
-        icon: StarsIcon,
+        icon: SparklesIcon,
         tool: "recommendProducts",
         tooltip:
           "Calls recommendProducts({ budget, audience }) — the LLM extracts both args and your handler queries the catalog.",
@@ -169,7 +168,7 @@ export function LiveDemo() {
     <section id="demo" className="relative py-24 sm:py-32">
       <div
         aria-hidden="true"
-        className="bg-dotgrid pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent_70%)]"
+        className="bg-dotgrid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent_70%)] opacity-40"
       />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
@@ -178,7 +177,7 @@ export function LiveDemo() {
             title={
               <>
                 It even works{" "}
-                <span className="from-primary to-foreground bg-linear-to-br bg-clip-text text-transparent">
+                <span className="bg-linear-to-br from-primary to-foreground bg-clip-text text-transparent">
                   on this page.
                 </span>
               </>
@@ -193,12 +192,12 @@ export function LiveDemo() {
               value={scenarioId}
               onValueChange={(v) => setScenarioId(v as ScenarioId)}
             >
-              <TabsList className="bg-card/40 border-border/60 h-auto rounded-full border p-1">
+              <TabsList className="h-auto rounded-full border border-border/60 bg-card/40 p-1">
                 {SCENARIOS.map((s) => (
                   <TabsTrigger
                     key={s.id}
                     value={s.id}
-                    className="data-[state=active]:bg-background gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium"
+                    className="gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium data-[state=active]:bg-background"
                   >
                     <HugeiconsIcon icon={s.icon} size={13} strokeWidth={2} />
                     {s.name}
@@ -210,12 +209,17 @@ export function LiveDemo() {
         </Reveal>
 
         <Reveal delay={180}>
-          <BrowserChrome scenario={scenario} prompts={scenario.prompts} onPrompt={openWith} />
+          <BrowserChrome
+            scenario={scenario}
+            prompts={scenario.prompts}
+            onPrompt={openWith}
+          />
         </Reveal>
 
         <Reveal delay={260}>
-          <p className="text-muted-foreground mt-6 text-center text-xs">
-            Tap a chip above or click the bubble in the bottom-right and type freely.
+          <p className="mt-6 text-center text-xs text-muted-foreground">
+            Tap a chip above or click the bubble in the bottom-right and type
+            freely.
           </p>
         </Reveal>
       </div>
@@ -233,48 +237,50 @@ function BrowserChrome({
   onPrompt: (prompt: string) => void
 }) {
   return (
-    <div className="border-border/70 bg-card/40 ring-primary-soft/40 surface-card mt-10 overflow-hidden rounded-2xl border shadow-[0_30px_80px_-30px_color-mix(in_oklab,var(--primary)_25%,transparent)]">
-      <div className="border-border/60 bg-muted/40 flex items-center gap-3 border-b px-4 py-2.5">
+    <div className="ring-primary-soft/40 surface-card mt-10 overflow-hidden rounded-2xl border border-border/70 bg-card/40 shadow-[0_30px_80px_-30px_color-mix(in_oklab,var(--primary)_25%,transparent)]">
+      <div className="flex items-center gap-3 border-b border-border/60 bg-muted/40 px-4 py-2.5">
         <div className="flex items-center gap-1.5">
           <span className="size-2.5 rounded-full bg-[#fc615d]" />
           <span className="size-2.5 rounded-full bg-[#fdbc40]" />
           <span className="size-2.5 rounded-full bg-[#34c749]" />
         </div>
-        <div className="text-muted-foreground/60 ml-2 hidden items-center gap-2 sm:flex">
+        <div className="ml-2 hidden items-center gap-2 text-muted-foreground/60 sm:flex">
           <HugeiconsIcon icon={ArrowLeft01Icon} size={14} strokeWidth={2} />
           <HugeiconsIcon icon={ArrowRight01Icon} size={14} strokeWidth={2} />
           <HugeiconsIcon icon={ReloadIcon} size={14} strokeWidth={2} />
         </div>
-        <div className="bg-background/70 border-border/60 text-muted-foreground mx-auto inline-flex max-w-md flex-1 items-center gap-2 truncate rounded-md border px-3 py-1 text-xs font-mono-tabular">
+        <div className="font-mono-tabular mx-auto inline-flex max-w-md flex-1 items-center gap-2 truncate rounded-md border border-border/60 bg-background/70 px-3 py-1 text-xs text-muted-foreground">
           <span className="text-primary">●</span>
           <span className="truncate">{scenario.url}</span>
         </div>
         <Badge
           variant="outline"
-          className="border-border/60 hidden font-mono-tabular text-[10px] tracking-widest uppercase sm:inline-flex"
+          className="font-mono-tabular hidden border-border/60 text-[10px] tracking-widest uppercase sm:inline-flex"
         >
           live
         </Badge>
       </div>
 
       <div className="grid gap-0 md:grid-cols-[1.1fr_1fr]">
-        <div className="border-border/60 relative h-[320px] border-b p-6 md:border-b-0 md:border-r md:h-auto">
-          <p className="text-muted-foreground text-[10px] font-mono-tabular uppercase tracking-widest">
+        <div className="relative h-[320px] border-b border-border/60 p-6 md:h-auto md:border-r md:border-b-0">
+          <p className="font-mono-tabular text-[10px] tracking-widest text-muted-foreground uppercase">
             simulated app
           </p>
-          <h4 className="font-heading text-foreground mt-1 text-lg font-semibold tracking-tight">
+          <h4 className="mt-1 font-heading text-lg font-semibold tracking-tight text-foreground">
             {scenario.page.title}
           </h4>
-          <p className="text-muted-foreground mt-1 text-xs">{scenario.page.subtitle}</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            {scenario.page.subtitle}
+          </p>
           <ul className="mt-5 flex flex-col gap-2">
             {scenario.page.rows.map((row) => (
               <li
                 key={row}
-                className="border-border/60 bg-background/60 text-foreground/85 flex items-center gap-3 rounded-lg border px-3 py-2.5 text-xs"
+                className="flex items-center gap-3 rounded-lg border border-border/60 bg-background/60 px-3 py-2.5 text-xs text-foreground/85"
               >
                 <span
                   aria-hidden="true"
-                  className="bg-primary/40 inline-block size-1.5 shrink-0 rounded-full"
+                  className="inline-block size-1.5 shrink-0 rounded-full bg-primary/40"
                 />
                 <span className="truncate">{row}</span>
               </li>
@@ -282,18 +288,18 @@ function BrowserChrome({
           </ul>
           <span
             aria-hidden="true"
-            className="from-background/70 pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t to-transparent"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-background/70 to-transparent"
           />
         </div>
 
-        <div className="bg-muted/15 flex flex-col gap-3 p-6">
+        <div className="flex flex-col gap-3 bg-muted/15 p-6">
           <Badge
             variant="outline"
-            className="border-border/70 bg-card/60 mr-auto gap-1.5 rounded-full px-3 py-1 text-xs"
+            className="mr-auto gap-1.5 rounded-full border-border/70 bg-card/60 px-3 py-1 text-xs"
           >
             <span
               aria-hidden="true"
-              className="bg-primary inline-block size-1.5 rounded-full shadow-[0_0_8px_2px_color-mix(in_oklab,var(--primary)_55%,transparent)]"
+              className="inline-block size-1.5 rounded-full bg-primary shadow-[0_0_8px_2px_color-mix(in_oklab,var(--primary)_55%,transparent)]"
             />
             Try a prompt
           </Badge>
@@ -306,14 +312,18 @@ function BrowserChrome({
                     type="button"
                     onClick={() => onPrompt(p.prompt)}
                     className={cn(
-                      "group/chip border-border/70 bg-card/70 inline-flex items-center justify-between gap-3 rounded-xl border px-4 py-2.5 text-left text-sm transition-all",
+                      "group/chip inline-flex items-center justify-between gap-3 rounded-xl border border-border/70 bg-card/70 px-4 py-2.5 text-left text-sm transition-all",
                       "hover:border-primary/40 hover:bg-card hover:shadow-[0_8px_24px_-12px_color-mix(in_oklab,var(--primary)_50%,transparent)]",
-                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60"
+                      "focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:outline-none"
                     )}
                   >
                     <span className="inline-flex min-w-0 items-center gap-2.5">
-                      <span className="border-primary/30 bg-primary/10 text-primary inline-flex size-7 shrink-0 items-center justify-center rounded-full border">
-                        <HugeiconsIcon icon={p.icon} size={13} strokeWidth={2.2} />
+                      <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
+                        <HugeiconsIcon
+                          icon={p.icon}
+                          size={13}
+                          strokeWidth={2.2}
+                        />
                       </span>
                       <span className="font-mono-tabular truncate text-[12.5px]">
                         {p.label}
@@ -323,16 +333,16 @@ function BrowserChrome({
                       icon={ArrowRight01Icon}
                       size={14}
                       strokeWidth={2}
-                      className="text-muted-foreground shrink-0 transition-transform group-hover/chip:translate-x-0.5 group-hover/chip:text-foreground"
+                      className="shrink-0 text-muted-foreground transition-transform group-hover/chip:translate-x-0.5 group-hover/chip:text-foreground"
                     />
                   </button>
                 </HoverCardTrigger>
                 <HoverCardContent side="left" className="w-72 text-xs">
-                  <p className="text-muted-foreground mb-2 inline-flex items-center gap-1.5 font-mono-tabular text-[10px] uppercase tracking-widest">
-                    <span className="bg-primary inline-block size-1.5 rounded-full" />
+                  <p className="font-mono-tabular mb-2 inline-flex items-center gap-1.5 text-[10px] tracking-widest text-muted-foreground uppercase">
+                    <span className="inline-block size-1.5 rounded-full bg-primary" />
                     will fire: <span className="text-primary">{p.tool}</span>
                   </p>
-                  <p className="text-foreground/85 leading-snug">{p.tooltip}</p>
+                  <p className="leading-snug text-foreground/85">{p.tooltip}</p>
                 </HoverCardContent>
               </HoverCard>
             ))}

@@ -1,11 +1,10 @@
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
   GithubIcon,
-  UserCircleIcon,
-  StarsIcon,
   QuoteDownIcon,
+  OpenSourceIcon,
 } from "@hugeicons/core-free-icons"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Reveal } from "./Reveal"
 
 export function AuthorNote() {
@@ -35,7 +34,8 @@ export function AuthorNote() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Avatar className="size-10 border border-border/60">
+              <Avatar size="xl" className="border border-border/60">
+                <AvatarImage src="/developer.jpeg" alt="Azamat Nabiev" />
                 <AvatarFallback className="bg-primary/15 font-semibold text-primary">
                   AN
                 </AvatarFallback>
@@ -53,13 +53,12 @@ export function AuthorNote() {
                   href="https://portfolio-nabiev-na.vercel.app/"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-8 items-center gap-1.5 rounded-full border border-border/60 px-3 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  className="inline-flex h-8 items-center gap-1.5 rounded-full border border-border/60 px-2 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 >
-                  <HugeiconsIcon
-                    icon={UserCircleIcon}
-                    size={12}
-                    strokeWidth={2}
-                  />
+                  <Avatar size="sm">
+                    <AvatarImage src="/developer.jpeg" alt="Azamat Nabiev" />
+                    <AvatarFallback>AN</AvatarFallback>
+                  </Avatar>
                   Developer
                 </a>
                 <a
@@ -72,7 +71,11 @@ export function AuthorNote() {
                   Follow
                 </a>
                 <span className="inline-flex h-8 items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 text-xs font-medium text-primary">
-                  <HugeiconsIcon icon={StarsIcon} size={12} strokeWidth={2} />
+                  <HugeiconsIcon
+                    icon={OpenSourceIcon}
+                    size={12}
+                    strokeWidth={2}
+                  />
                   Open source · MIT
                 </span>
               </div>

@@ -6,7 +6,6 @@ import {
   Menu01Icon,
   Search01Icon,
   ArrowRight01Icon,
-  StarsIcon,
   CodeIcon,
   Layers01Icon,
   PuzzleIcon,
@@ -80,12 +79,14 @@ export function Nav() {
   const [progress, setProgress] = useState(0)
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [sheetOpen, setSheetOpen] = useState(false)
-  const [isMac, setIsMac] = useState(true)
+  const [isMac] = useState(() => {
+    if (typeof window === "undefined") return true
+    return /Mac|iPhone|iPad|iPod/i.test(navigator.platform)
+  })
   const location = useLocation()
   const navigate = useNavigate()
 
   useEffect(() => {
-    setIsMac(/Mac|iPhone|iPad|iPod/i.test(navigator.platform))
     function onScroll() {
       const y = window.scrollY
       setScrolled(y > 8)
@@ -368,7 +369,7 @@ export function Nav() {
                     />
                   </Button>
                   <p className="mt-4 inline-flex items-center gap-1.5 px-2 text-[10px] text-muted-foreground">
-                    <HugeiconsIcon icon={StarsIcon} size={12} strokeWidth={2} />
+                    <HugeiconsIcon icon={CodeIcon} size={12} strokeWidth={2} />
                     Open source · MIT licensed
                   </p>
                 </nav>
