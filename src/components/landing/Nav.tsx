@@ -134,16 +134,20 @@ export function Nav() {
         className={cn(
           "fixed inset-x-0 top-0 z-40 transition-all",
           scrolled
-            ? "border-border/60 bg-background/75 border-b backdrop-blur-xl"
+            ? "border-b border-border/60 bg-background/75 backdrop-blur-xl"
             : "border-transparent"
         )}
       >
         <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
-          <Link to="/" aria-label="wisp home" className="inline-flex items-center gap-2">
+          <Link
+            to="/"
+            aria-label="wisp home"
+            className="inline-flex items-center gap-2"
+          >
             <Wordmark />
             <Badge
               variant="outline"
-              className="border-border/60 text-muted-foreground hidden font-mono-tabular rounded-full px-1.5 py-0 text-[10px] tracking-widest uppercase sm:inline-flex"
+              className="font-mono-tabular hidden rounded-full border-border/60 px-1.5 py-0 text-[10px] tracking-widest text-muted-foreground uppercase sm:inline-flex"
             >
               v0.1.0
             </Badge>
@@ -152,7 +156,7 @@ export function Nav() {
           <NavigationMenu className="ml-2 hidden md:block" viewport={false}>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-muted-foreground hover:text-foreground hover:bg-accent data-[state=open]:bg-accent rounded-full px-3 py-1.5 text-sm font-normal h-auto">
+                <NavigationMenuTrigger className="h-auto rounded-full bg-transparent px-3 py-1.5 text-sm font-normal text-muted-foreground hover:bg-accent hover:text-foreground data-[state=open]:bg-accent">
                   Product
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="p-2 md:w-[460px]">
@@ -162,15 +166,19 @@ export function Nav() {
                         <button
                           type="button"
                           onClick={() => handleAnchorNav(link.href)}
-                          className="group hover:bg-accent focus-visible:bg-accent flex w-full flex-col gap-1 rounded-md p-3 text-left transition-colors focus:outline-none"
+                          className="group flex w-full flex-col gap-1 rounded-md p-3 text-left transition-colors hover:bg-accent focus:outline-none focus-visible:bg-accent"
                         >
                           <span className="flex items-center gap-2 text-sm font-medium">
-                            <span className="border-border/60 bg-card text-primary flex size-6 items-center justify-center rounded-md border">
-                              <HugeiconsIcon icon={link.icon} size={12} strokeWidth={2} />
+                            <span className="flex size-6 items-center justify-center rounded-md border border-border/60 bg-card text-primary">
+                              <HugeiconsIcon
+                                icon={link.icon}
+                                size={12}
+                                strokeWidth={2}
+                              />
                             </span>
                             {link.label}
                           </span>
-                          <span className="text-muted-foreground line-clamp-2 text-xs leading-snug">
+                          <span className="line-clamp-2 text-xs leading-snug text-muted-foreground">
                             {link.description}
                           </span>
                         </button>
@@ -186,7 +194,7 @@ export function Nav() {
                       href={link.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-muted-foreground hover:text-foreground hover:bg-accent inline-flex items-center rounded-full px-3 py-1.5 text-sm transition-colors"
+                      className="inline-flex items-center rounded-full px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                     >
                       {link.label}
                     </a>
@@ -196,7 +204,7 @@ export function Nav() {
                     <button
                       type="button"
                       onClick={() => handleAnchorNav(link.href)}
-                      className="text-muted-foreground hover:text-foreground hover:bg-accent inline-flex items-center rounded-full px-3 py-1.5 text-sm transition-colors"
+                      className="inline-flex items-center rounded-full px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                     >
                       {link.label}
                     </button>
@@ -211,22 +219,22 @@ export function Nav() {
               type="button"
               onClick={() => setPaletteOpen(true)}
               aria-label="Open command palette"
-              className="border-border/60 text-muted-foreground hover:text-foreground hover:bg-accent hidden h-9 items-center gap-2 rounded-full border pr-1.5 pl-3 text-xs transition-colors sm:inline-flex"
+              className="hidden h-9 items-center gap-2 rounded-full border border-border/60 pr-1.5 pl-3 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:inline-flex"
             >
               <HugeiconsIcon icon={Search01Icon} size={14} strokeWidth={2} />
               <span className="hidden lg:inline">Search</span>
-              <kbd className="border-border/80 bg-muted/60 text-muted-foreground inline-flex items-center gap-0.5 rounded-md border px-1.5 py-0.5 font-mono-tabular text-[10px] tracking-wider">
+              <kbd className="font-mono-tabular inline-flex items-center gap-0.5 rounded-md border border-border/80 bg-muted/60 px-1.5 py-0.5 text-[10px] tracking-wider text-muted-foreground">
                 {isMac ? "⌘" : "Ctrl"}
                 <span>K</span>
               </kbd>
             </button>
 
             <a
-              href="https://github.com/azamat/wisp"
+              href="https://github.com/Ali747711/wisp-web-ai-agent-integration"
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
-              className="border-border/60 text-muted-foreground hover:text-foreground hover:bg-accent hidden size-9 items-center justify-center rounded-full border transition-colors sm:inline-flex"
+              className="hidden size-9 items-center justify-center rounded-full border border-border/60 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:inline-flex"
             >
               <HugeiconsIcon icon={GithubIcon} size={16} strokeWidth={2} />
             </a>
@@ -239,7 +247,11 @@ export function Nav() {
               className="hidden h-9 gap-1 rounded-full px-4 text-sm font-medium sm:inline-flex"
             >
               Get started
-              <HugeiconsIcon icon={ArrowRight01Icon} size={14} strokeWidth={2.2} />
+              <HugeiconsIcon
+                icon={ArrowRight01Icon}
+                size={14}
+                strokeWidth={2.2}
+              />
             </Button>
 
             <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
@@ -247,7 +259,7 @@ export function Nav() {
                 <button
                   type="button"
                   aria-label="Open menu"
-                  className="border-border/60 text-muted-foreground hover:text-foreground hover:bg-accent inline-flex size-9 items-center justify-center rounded-full border transition-colors sm:hidden"
+                  className="inline-flex size-9 items-center justify-center rounded-full border border-border/60 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:hidden"
                 >
                   <HugeiconsIcon icon={Menu01Icon} size={18} strokeWidth={2} />
                 </button>
@@ -256,7 +268,10 @@ export function Nav() {
                 <SheetHeader className="border-b">
                   <SheetTitle className="flex items-center gap-2 text-base">
                     <Wordmark />
-                    <Badge variant="outline" className="font-mono-tabular text-[10px]">
+                    <Badge
+                      variant="outline"
+                      className="font-mono-tabular text-[10px]"
+                    >
                       v0.1.0
                     </Badge>
                   </SheetTitle>
@@ -265,7 +280,7 @@ export function Nav() {
                   </SheetDescription>
                 </SheetHeader>
                 <nav className="flex flex-col gap-1 p-4">
-                  <p className="text-muted-foreground mb-1 px-2 text-[10px] font-mono-tabular tracking-widest uppercase">
+                  <p className="font-mono-tabular mb-1 px-2 text-[10px] tracking-widest text-muted-foreground uppercase">
                     Product
                   </p>
                   {PRODUCT_LINKS.map((link) => (
@@ -273,21 +288,25 @@ export function Nav() {
                       key={link.href}
                       type="button"
                       onClick={() => handleAnchorNav(link.href)}
-                      className="hover:bg-accent flex items-center gap-3 rounded-md px-2 py-2.5 text-left text-sm"
+                      className="flex items-center gap-3 rounded-md px-2 py-2.5 text-left text-sm hover:bg-accent"
                     >
-                      <span className="border-border/60 bg-card text-primary flex size-7 items-center justify-center rounded-md border">
-                        <HugeiconsIcon icon={link.icon} size={14} strokeWidth={2} />
+                      <span className="flex size-7 items-center justify-center rounded-md border border-border/60 bg-card text-primary">
+                        <HugeiconsIcon
+                          icon={link.icon}
+                          size={14}
+                          strokeWidth={2}
+                        />
                       </span>
                       <span className="flex flex-col">
                         <span className="font-medium">{link.label}</span>
-                        <span className="text-muted-foreground text-xs">
+                        <span className="text-xs text-muted-foreground">
                           {link.description}
                         </span>
                       </span>
                     </button>
                   ))}
                   <Separator className="my-3" />
-                  <p className="text-muted-foreground mb-1 px-2 text-[10px] font-mono-tabular tracking-widest uppercase">
+                  <p className="font-mono-tabular mb-1 px-2 text-[10px] tracking-widest text-muted-foreground uppercase">
                     Pages
                   </p>
                   {PAGE_LINKS.map((link) => (
@@ -295,11 +314,11 @@ export function Nav() {
                       key={link.href}
                       type="button"
                       onClick={() => handleAnchorNav(link.href)}
-                      className="hover:bg-accent rounded-md px-2 py-2.5 text-left text-sm"
+                      className="rounded-md px-2 py-2.5 text-left text-sm hover:bg-accent"
                     >
                       {link.label}
                       {link.external && (
-                        <span className="text-muted-foreground ml-1 text-[10px]">
+                        <span className="ml-1 text-[10px] text-muted-foreground">
                           ↗
                         </span>
                       )}
@@ -308,13 +327,17 @@ export function Nav() {
                   <Separator className="my-3" />
                   <div className="flex items-center gap-2 px-2">
                     <a
-                      href="https://github.com/azamat/wisp"
+                      href="https://github.com/Ali747711/wisp-web-ai-agent-integration"
                       target="_blank"
                       rel="noreferrer"
                       aria-label="GitHub"
-                      className="border-border/60 text-muted-foreground hover:text-foreground hover:bg-accent inline-flex size-9 items-center justify-center rounded-full border"
+                      className="inline-flex size-9 items-center justify-center rounded-full border border-border/60 text-muted-foreground hover:bg-accent hover:text-foreground"
                     >
-                      <HugeiconsIcon icon={GithubIcon} size={16} strokeWidth={2} />
+                      <HugeiconsIcon
+                        icon={GithubIcon}
+                        size={16}
+                        strokeWidth={2}
+                      />
                     </a>
                     <ThemeToggle />
                     <button
@@ -323,9 +346,13 @@ export function Nav() {
                         setSheetOpen(false)
                         setTimeout(() => setPaletteOpen(true), 100)
                       }}
-                      className="border-border/60 text-muted-foreground hover:text-foreground hover:bg-accent inline-flex h-9 flex-1 items-center justify-center gap-2 rounded-full border text-xs"
+                      className="inline-flex h-9 flex-1 items-center justify-center gap-2 rounded-full border border-border/60 text-xs text-muted-foreground hover:bg-accent hover:text-foreground"
                     >
-                      <HugeiconsIcon icon={Search01Icon} size={14} strokeWidth={2} />
+                      <HugeiconsIcon
+                        icon={Search01Icon}
+                        size={14}
+                        strokeWidth={2}
+                      />
                       Search
                     </button>
                   </div>
@@ -340,7 +367,7 @@ export function Nav() {
                       strokeWidth={2.2}
                     />
                   </Button>
-                  <p className="text-muted-foreground mt-4 inline-flex items-center gap-1.5 px-2 text-[10px]">
+                  <p className="mt-4 inline-flex items-center gap-1.5 px-2 text-[10px] text-muted-foreground">
                     <HugeiconsIcon icon={StarsIcon} size={12} strokeWidth={2} />
                     Open source · MIT licensed
                   </p>
@@ -355,7 +382,7 @@ export function Nav() {
           className="absolute inset-x-0 bottom-0 h-px overflow-hidden"
         >
           <div
-            className="bg-primary h-full origin-left transition-transform duration-150 ease-out"
+            className="h-full origin-left bg-primary transition-transform duration-150 ease-out"
             style={{ transform: `scaleX(${progress})` }}
           />
         </div>

@@ -1,116 +1,131 @@
+import { Link } from "react-router-dom"
 import { HugeiconsIcon } from "@hugeicons/react"
-import {
-  ArrowRight01Icon,
-  GithubIcon,
-  NpmIcon,
-} from "@hugeicons/core-free-icons"
-import { Button } from "@/components/ui/button"
+import { GithubIcon, NpmIcon } from "@hugeicons/core-free-icons"
 import { Separator } from "@/components/ui/separator"
-import { Reveal } from "./Reveal"
 import { Wordmark } from "./Wordmark"
+
+type FooterColumn = {
+  heading: string
+  links: { label: string; href: string; external?: boolean }[]
+}
+
+const COLUMNS: FooterColumn[] = [
+  {
+    heading: "Product",
+    links: [
+      { label: "Features", href: "/#features" },
+      { label: "Live demo", href: "/#demo" },
+      { label: "Quickstart", href: "/#quickstart" },
+      { label: "Comparison", href: "/#comparison" },
+      { label: "Why wisp", href: "/#why" },
+    ],
+  },
+  {
+    heading: "Resources",
+    links: [
+      { label: "Docs", href: "https://docs.wisp.dev", external: true },
+      { label: "Changelog", href: "/changelog" },
+      { label: "FAQ", href: "/#faq" },
+      {
+        label: "GitHub",
+        href: "https://github.com/Ali747711/wisp-web-ai-agent-integration",
+        external: true,
+      },
+    ],
+  },
+  {
+    heading: "Install",
+    links: [
+      {
+        label: "npm",
+        href: "https://www.npmjs.com/package/@wisp/react",
+        external: true,
+      },
+      {
+        label: "@wisp/core",
+        href: "https://www.npmjs.com/package/@wisp/core",
+        external: true,
+      },
+      {
+        label: "@wisp/react",
+        href: "https://www.npmjs.com/package/@wisp/react",
+        external: true,
+      },
+      {
+        label: "@wisp/next",
+        href: "https://www.npmjs.com/package/@wisp/next",
+        external: true,
+      },
+    ],
+  },
+]
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t pt-24 sm:pt-32">
-      <div
-        aria-hidden="true"
-        className="bg-dotgrid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_100%,black,transparent_70%)] opacity-50"
-      />
-      <div
-        aria-hidden="true"
-        className="hero-glow pointer-events-none absolute inset-x-0 bottom-0 h-[420px] [transform:scaleY(-1)]"
-      />
-
-      <div className="relative mx-auto max-w-6xl px-6">
-        <Reveal>
-          <div className="flex flex-col items-center text-center">
-            <h2 className="font-heading max-w-3xl text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl md:text-6xl">
-              Ship your agent{" "}
-              <span className="from-primary to-foreground bg-linear-to-br bg-clip-text text-transparent">
-                today.
-              </span>
-            </h2>
-            <p className="text-muted-foreground mt-6 max-w-xl text-base sm:text-lg">
-              Five minutes from <span className="font-mono-tabular">npm install</span> to a
-              working agent in your app.
+    <footer className="relative overflow-hidden border-t border-border/60 bg-muted/15">
+      <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_repeat(3,minmax(0,1fr))]">
+          <div className="flex flex-col gap-4">
+            <Link to="/" aria-label="wisp home">
+              <Wordmark />
+            </Link>
+            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+              A drop-in agent SDK for React and Next.js. Type-safe commands,
+              streaming UI, no glue code.
             </p>
-            <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
-              <Button
-                size="lg"
-                className="glow-primary group h-12 gap-2 rounded-full px-6 text-sm font-medium"
-                asChild
-              >
-                <a href="#quickstart">
-                  Read the quickstart
-                  <HugeiconsIcon
-                    icon={ArrowRight01Icon}
-                    size={16}
-                    strokeWidth={2.2}
-                    className="transition-transform group-hover:translate-x-0.5"
-                  />
-                </a>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="h-12 gap-2 rounded-full px-6 text-sm font-medium"
-                asChild
-              >
-                <a
-                  href="https://github.com/azamat/wisp"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <HugeiconsIcon icon={GithubIcon} size={16} strokeWidth={2} />
-                  Star on GitHub
-                </a>
-              </Button>
+            <div className="inline-flex w-fit items-center gap-3 rounded-lg border border-border/60 bg-card/40 px-3 py-2">
+              <span className="font-mono-tabular text-xs text-primary">$</span>
+              <span className="font-mono-tabular text-xs text-foreground/85">
+                npm i @wisp/react
+              </span>
+            </div>
+            <div className="mt-2 inline-flex items-center gap-2 text-[11px] text-muted-foreground">
+              <span
+                aria-hidden="true"
+                className="inline-block size-1.5 rounded-full bg-primary shadow-[0_0_6px_2px_color-mix(in_oklab,var(--primary)_50%,transparent)]"
+              />
+              <span className="font-mono-tabular tracking-wider uppercase">
+                v0.1.0 · MIT licensed
+              </span>
             </div>
           </div>
-        </Reveal>
 
-        <Separator className="bg-border/60 mt-24" />
+          {COLUMNS.map((col) => (
+            <div key={col.heading} className="flex flex-col gap-3">
+              <p className="font-mono-tabular text-xs tracking-widest text-foreground uppercase">
+                {col.heading}
+              </p>
+              <ul className="flex flex-col gap-2">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <FooterLink {...link} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
-        <div className="flex flex-col items-start justify-between gap-8 py-10 sm:flex-row sm:items-center">
-          <div className="flex flex-col gap-2">
-            <Wordmark />
-            <p className="text-muted-foreground text-xs">
-              MIT licensed · Made by{" "}
-              <a
-                href="https://github.com/azamat"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-foreground underline-offset-4 hover:underline"
-              >
-                Azamat Nabiev
-              </a>
-            </p>
-          </div>
+        <Separator className="mt-12 bg-border/60" />
 
-          <nav className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+        <div className="mt-6 flex flex-col items-start justify-between gap-4 text-xs sm:flex-row sm:items-center">
+          <p className="text-muted-foreground">
+            © {new Date().getFullYear()} wisp · Made by{" "}
             <a
-              href="/docs"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Docs
-            </a>
-            <a
-              href="#features"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Features
-            </a>
-            <a
-              href="#quickstart"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Quickstart
-            </a>
-            <a
-              href="https://github.com/azamat/wisp"
+              href="https://github.com/azamat"
               target="_blank"
               rel="noreferrer"
-              className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 transition-colors"
+              className="underline-offset-4 hover:text-foreground hover:underline"
+            >
+              Azamat Nabiev
+            </a>
+          </p>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://github.com/Ali747711/wisp-web-ai-agent-integration"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
             >
               <HugeiconsIcon icon={GithubIcon} size={14} strokeWidth={2} />
               GitHub
@@ -119,14 +134,56 @@ export function Footer() {
               href="https://www.npmjs.com/package/@wisp/react"
               target="_blank"
               rel="noreferrer"
-              className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 transition-colors"
+              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
             >
               <HugeiconsIcon icon={NpmIcon} size={14} strokeWidth={2} />
               npm
             </a>
-          </nav>
+          </div>
         </div>
       </div>
     </footer>
+  )
+}
+
+function FooterLink({
+  label,
+  href,
+  external,
+}: {
+  label: string
+  href: string
+  external?: boolean
+}) {
+  if (external || href.startsWith("http")) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      >
+        {label}
+        <span className="text-[10px] text-muted-foreground/50">↗</span>
+      </a>
+    )
+  }
+  if (href.startsWith("/#")) {
+    return (
+      <a
+        href={href}
+        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+      >
+        {label}
+      </a>
+    )
+  }
+  return (
+    <Link
+      to={href}
+      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+    >
+      {label}
+    </Link>
   )
 }

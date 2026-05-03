@@ -60,7 +60,12 @@ export default function Layout({ children }) {
 
 const FILES = [
   { id: "route", name: "route.ts", code: ROUTE_CODE, lang: "tsx" as const },
-  { id: "commands", name: "commands.ts", code: COMMANDS_CODE, lang: "tsx" as const },
+  {
+    id: "commands",
+    name: "commands.ts",
+    code: COMMANDS_CODE,
+    lang: "tsx" as const,
+  },
   { id: "layout", name: "layout.tsx", code: LAYOUT_CODE, lang: "tsx" as const },
 ]
 
@@ -92,7 +97,7 @@ export function Hero() {
             <Reveal>
               <Badge
                 variant="secondary"
-                className="border-primary/25 bg-primary/10 text-primary-foreground dark:text-primary mb-6 gap-1.5 rounded-full border px-3 py-1 backdrop-blur"
+                className="mb-6 gap-1.5 rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-primary-foreground backdrop-blur dark:text-primary"
               >
                 <HugeiconsIcon icon={StarsIcon} size={14} strokeWidth={2} />
                 <span className="font-mono-tabular tracking-wider uppercase">
@@ -102,15 +107,15 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={60}>
-              <h1 className="font-heading max-w-2xl text-balance text-5xl leading-[1.02] font-bold tracking-tight sm:text-6xl">
+              <h1 className="max-w-2xl font-heading text-5xl leading-[1.02] font-bold tracking-tight text-balance sm:text-6xl">
                 Drop an{" "}
                 <span className="relative inline-block">
-                  <span className="from-primary via-primary to-foreground bg-linear-to-br bg-clip-text text-transparent">
+                  <span className="bg-linear-to-br from-primary via-primary to-foreground bg-clip-text text-transparent">
                     AI agent
                   </span>
                   <span
                     aria-hidden="true"
-                    className="bg-primary/30 absolute inset-x-0 -bottom-1 -z-10 h-3 blur-md"
+                    className="absolute inset-x-0 -bottom-1 -z-10 h-3 bg-primary/30 blur-md"
                   />
                 </span>{" "}
                 into your app.
@@ -120,10 +125,11 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={140}>
-              <p className="text-muted-foreground mt-6 max-w-xl text-pretty text-lg sm:text-xl">
-                <span className="text-foreground">wisp</span> is a drop-in agent SDK
-                for React and Next.js. Define your app's capabilities as type-safe
-                commands — we handle streaming, tool-calling, and the UI.
+              <p className="mt-6 max-w-xl text-lg text-pretty text-muted-foreground sm:text-xl">
+                <span className="text-foreground">wisp</span> is a drop-in agent
+                SDK for React and Next.js. Define your app's capabilities as
+                type-safe commands — we handle streaming, tool-calling, and the
+                UI.
               </p>
             </Reveal>
 
@@ -151,11 +157,15 @@ export function Hero() {
                   asChild
                 >
                   <a
-                    href="https://github.com/azamat/wisp"
+                    href="https://github.com/Ali747711/wisp-web-ai-agent-integration"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <HugeiconsIcon icon={GithubIcon} size={16} strokeWidth={2} />
+                    <HugeiconsIcon
+                      icon={GithubIcon}
+                      size={16}
+                      strokeWidth={2}
+                    />
                     Star on GitHub
                   </a>
                 </Button>
@@ -173,7 +183,7 @@ export function Hero() {
                 {TRUST_POINTS.map((point) => (
                   <li
                     key={point}
-                    className="text-muted-foreground inline-flex items-center gap-1.5"
+                    className="inline-flex items-center gap-1.5 text-muted-foreground"
                   >
                     <HugeiconsIcon
                       icon={Tick02Icon}
@@ -192,15 +202,15 @@ export function Hero() {
             <div className="relative">
               <div
                 aria-hidden="true"
-                className="from-primary/35 absolute -inset-3 -z-10 rounded-[28px] bg-gradient-to-br to-transparent opacity-60 blur-2xl"
+                className="absolute -inset-3 -z-10 rounded-[28px] bg-gradient-to-br from-primary/35 to-transparent opacity-60 blur-2xl"
               />
 
-              <div className="border-border/70 bg-card/80 ring-primary-soft/40 surface-card overflow-hidden rounded-2xl border shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--primary)_30%,transparent),0_2px_0_0_color-mix(in_oklab,var(--foreground)_4%,transparent)_inset]">
+              <div className="ring-primary-soft/40 surface-card overflow-hidden rounded-2xl border border-border/70 bg-card/80 shadow-[0_24px_60px_-24px_color-mix(in_oklab,var(--primary)_30%,transparent),0_2px_0_0_color-mix(in_oklab,var(--foreground)_4%,transparent)_inset]">
                 <Tabs value={activeFile} onValueChange={setActiveFile}>
-                  <div className="border-border/60 bg-muted/40 flex items-center gap-2 border-b px-3 py-2">
+                  <div className="flex items-center gap-2 border-b border-border/60 bg-muted/40 px-3 py-2">
                     <div
                       aria-hidden="true"
-                      className="flex items-center gap-1.5 pl-1 pr-1"
+                      className="flex items-center gap-1.5 pr-1 pl-1"
                     >
                       <span className="size-2.5 rounded-full bg-[#fc615d]" />
                       <span className="size-2.5 rounded-full bg-[#fdbc40]" />
@@ -213,7 +223,7 @@ export function Hero() {
                           value={file.id}
                           className={cn(
                             "font-mono-tabular text-muted-foreground data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none",
-                            "rounded-md border border-transparent data-[state=active]:border-border/60 px-2.5 py-1 text-xs font-normal"
+                            "rounded-md border border-transparent px-2.5 py-1 text-xs font-normal data-[state=active]:border-border/60"
                           )}
                         >
                           {file.name}
@@ -235,23 +245,23 @@ export function Hero() {
                         lang={file.lang}
                         showCopy={false}
                         density="comfortable"
-                        className="border-0 rounded-none ring-0 shadow-none"
+                        className="rounded-none border-0 shadow-none ring-0"
                       />
                     </TabsContent>
                   ))}
                 </Tabs>
 
-                <div className="border-border/60 bg-muted/30 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t px-4 py-2.5 text-[11px]">
-                  <span className="text-muted-foreground inline-flex items-center gap-1.5">
-                    <span className="bg-primary inline-block size-1.5 rounded-full animate-pulse" />
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-border/60 bg-muted/30 px-4 py-2.5 text-[11px]">
+                  <span className="inline-flex items-center gap-1.5 text-muted-foreground">
+                    <span className="inline-block size-1.5 animate-pulse rounded-full bg-primary" />
                     <span className="font-mono-tabular">streaming · ready</span>
                   </span>
                   <span className="text-muted-foreground/70">·</span>
-                  <span className="text-muted-foreground font-mono-tabular">
+                  <span className="font-mono-tabular text-muted-foreground">
                     OpenAI · Anthropic
                   </span>
                   <span className="text-muted-foreground/70">·</span>
-                  <span className="text-muted-foreground font-mono-tabular">
+                  <span className="font-mono-tabular text-muted-foreground">
                     Zod → JSON Schema
                   </span>
                 </div>

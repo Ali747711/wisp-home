@@ -8,7 +8,7 @@ import {
   Search01Icon,
   ShoppingBag01Icon,
   CustomerSupportIcon,
-  Reload01Icon,
+  ReloadIcon,
   ArrowLeft01Icon,
 } from "@hugeicons/core-free-icons"
 import { Badge } from "@/components/ui/badge"
@@ -243,7 +243,7 @@ function BrowserChrome({
         <div className="text-muted-foreground/60 ml-2 hidden items-center gap-2 sm:flex">
           <HugeiconsIcon icon={ArrowLeft01Icon} size={14} strokeWidth={2} />
           <HugeiconsIcon icon={ArrowRight01Icon} size={14} strokeWidth={2} />
-          <HugeiconsIcon icon={Reload01Icon} size={14} strokeWidth={2} />
+          <HugeiconsIcon icon={ReloadIcon} size={14} strokeWidth={2} />
         </div>
         <div className="bg-background/70 border-border/60 text-muted-foreground mx-auto inline-flex max-w-md flex-1 items-center gap-2 truncate rounded-md border px-3 py-1 text-xs font-mono-tabular">
           <span className="text-primary">●</span>

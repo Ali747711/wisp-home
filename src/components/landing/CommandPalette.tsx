@@ -73,7 +73,11 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
             <span>Comparison</span>
           </CommandItem>
           <CommandItem onSelect={() => go("#faq")}>
-            <HugeiconsIcon icon={FileQuestionMarkIcon} size={16} strokeWidth={2} />
+            <HugeiconsIcon
+              icon={FileQuestionMarkIcon}
+              size={16}
+              strokeWidth={2}
+            />
             <span>FAQ</span>
           </CommandItem>
         </CommandGroup>
@@ -89,14 +93,24 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
             <HugeiconsIcon icon={CommandIcon} size={16} strokeWidth={2} />
             <span>Changelog</span>
           </CommandItem>
-          <CommandItem onSelect={() => go("https://github.com/azamat/wisp")}>
+          <CommandItem
+            onSelect={() =>
+              go("https://github.com/Ali747711/wisp-web-ai-agent-integration")
+            }
+          >
             <HugeiconsIcon icon={GithubIcon} size={16} strokeWidth={2} />
             <span>GitHub repository</span>
             <CommandShortcut>
-              <HugeiconsIcon icon={LinkSquare02Icon} size={12} strokeWidth={2} />
+              <HugeiconsIcon
+                icon={LinkSquare02Icon}
+                size={12}
+                strokeWidth={2}
+              />
             </CommandShortcut>
           </CommandItem>
-          <CommandItem onSelect={() => go("https://www.npmjs.com/package/@wisp/react")}>
+          <CommandItem
+            onSelect={() => go("https://www.npmjs.com/package/@wisp/react")}
+          >
             <HugeiconsIcon icon={LinkSquare02Icon} size={16} strokeWidth={2} />
             <span>npm package</span>
           </CommandItem>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { toast } from "sonner"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Copy01Icon, Tick02Icon } from "@hugeicons/core-free-icons"
 import { cn } from "@/lib/utils"
@@ -21,10 +22,16 @@ export function CopyButton({ value, className, label = "Copy" }: CopyButtonProps
     try {
       await navigator.clipboard.writeText(value)
       setCopied(true)
+      const preview =
+        value.length > 60 ? value.slice(0, 57).trimEnd() + "…" : value
+      toast.success("Copied to clipboard", {
+        description: preview,
+        duration: 2200,
+      })
       if (timer.current !== null) window.clearTimeout(timer.current)
       timer.current = window.setTimeout(() => setCopied(false), 1600)
     } catch {
-      /* ignore — clipboard may be unavailable */
+      toast.error("Couldn't access the clipboard")
     }
   }
 
