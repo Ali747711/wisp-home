@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+
+    <title>wisp — AI agents for React & Next.js</title>
+    <meta
+      name="description"
+      content="Drop-in AI agents for React and Next.js. Define your app's capabilities as type-safe commands. wisp handles streaming, tool-calling, and the UI."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="wisp — AI agents for React & Next.js" />
+    <meta
+      property="og:description"
+      content="One install, one provider wrap, one component drop. Your app has a working agent that knows your APIs."
+    />
+    <meta property="og:image" content="/og-image.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="wisp — AI agents for React & Next.js" />
+    <meta
+      name="twitter:description"
+      content="Drop-in AI agents for React and Next.js. Type-safe commands, streaming, and a polished UI kit."
+    />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var theme = stored === "light" || stored === "dark" ? stored : prefersDark ? "dark" : "light";
+          document.documentElement.classList.add(theme);
+        } catch (e) {
+          /* no-op */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
