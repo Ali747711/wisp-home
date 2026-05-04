@@ -1,9 +1,17 @@
-import type { AgentEvent } from "@wisp/core"
-
-type Frame =
+export type Frame =
   | { kind: "text"; delta: string; delay?: number }
-  | { kind: "tool_call"; name: string; args: unknown; delay?: number }
-  | { kind: "tool_result"; name: string; result: unknown; delay?: number }
+  | {
+      kind: "tool_call"
+      name: string
+      args: Record<string, unknown>
+      delay?: number
+    }
+  | {
+      kind: "tool_result"
+      name: string
+      result: unknown
+      delay?: number
+    }
   | { kind: "done"; delay?: number }
 
 type Script = {
@@ -13,8 +21,7 @@ type Script = {
 
 const SCRIPTS: Script[] = [
   {
-    match: (t) =>
-      /create.*task|new task|\/createtask|\/tasks add/i.test(t),
+    match: (t) => /create.*task|new task|\/createtask|\/tasks add/i.test(t),
     frames: [
       { kind: "text", delta: "Sure ", delay: 80 },
       { kind: "text", delta: "— I'll create that task ", delay: 70 },
@@ -72,9 +79,21 @@ const SCRIPTS: Script[] = [
       { kind: "text", delta: "…\n\n", delay: 240 },
       { kind: "text", delta: "**3 open PRs**, ranked by size:\n\n", delay: 180 },
       { kind: "text", delta: "• ", delay: 60 },
-      { kind: "text", delta: "**#42** Add Anthropic adapter — _+412 / -86_\n", delay: 90 },
-      { kind: "text", delta: "• **#41** Refactor SSE parser — _+98 / -64_\n", delay: 90 },
-      { kind: "text", delta: "• **#40** Bump zod to v3.23 — _+2 / -2_\n\n", delay: 90 },
+      {
+        kind: "text",
+        delta: "**#42** Add Anthropic adapter — _+412 / -86_\n",
+        delay: 90,
+      },
+      {
+        kind: "text",
+        delta: "• **#41** Refactor SSE parser — _+98 / -64_\n",
+        delay: 90,
+      },
+      {
+        kind: "text",
+        delta: "• **#40** Bump zod to v3.23 — _+2 / -2_\n\n",
+        delay: 90,
+      },
       {
         kind: "text",
         delta: "Want me to leave a comment on any of them?",
@@ -90,9 +109,17 @@ const SCRIPTS: Script[] = [
       { kind: "text", delta: "I'm your app's agent, ", delay: 60 },
       { kind: "text", delta: "wired up via wisp. ", delay: 60 },
       { kind: "text", delta: "Try one of these:\n\n", delay: 80 },
-      { kind: "text", delta: "• `Create a task to write the README`\n", delay: 60 },
+      {
+        kind: "text",
+        delta: "• `Create a task to write the README`\n",
+        delay: 60,
+      },
       { kind: "text", delta: "• `List my open tasks`\n", delay: 60 },
-      { kind: "text", delta: "• `Summarize my open pull requests`", delay: 60 },
+      {
+        kind: "text",
+        delta: "• `Summarize my open pull requests`",
+        delay: 60,
+      },
       { kind: "done", delay: 100 },
     ],
   },
@@ -104,59 +131,23 @@ const FALLBACK: Frame[] = [
   { kind: "text", delta: "your real LLM ", delay: 60 },
   { kind: "text", delta: "(OpenAI or Anthropic) ", delay: 60 },
   { kind: "text", delta: "and run any matching `defineCommand`. ", delay: 60 },
-  { kind: "text", delta: "This page uses a scripted demo backend.\n\n", delay: 60 },
+  {
+    kind: "text",
+    delta: "This page uses a scripted demo backend.\n\n",
+    delay: 60,
+  },
   { kind: "text", delta: "Try: ", delay: 80 },
-  { kind: "text", delta: "_create a task_, _list tasks_, _summarize my PRs_.", delay: 80 },
+  {
+    kind: "text",
+    delta: "_create a task_, _list tasks_, _summarize my PRs_.",
+    delay: 80,
+  },
   { kind: "done", delay: 80 },
 ]
 
-function pickScript(latestUserText: string): Frame[] {
+export function getResponseFrames(text: string): Frame[] {
   for (const s of SCRIPTS) {
-    if (s.match(latestUserText)) return s.frames
+    if (s.match(text)) return s.frames
   }
   return FALLBACK
-}
-
-function frameToEvent(frame: Frame): AgentEvent | null {
-  if (frame.kind === "text") return { type: "text", delta: frame.delta }
-  if (frame.kind === "tool_call") {
-    return {
-      type: "tool_call",
-      call: {
-        id: `call_${Math.random().toString(36).slice(2, 8)}`,
-        name: frame.name,
-        args: frame.args,
-      },
-    }
-  }
-  if (frame.kind === "tool_result") {
-    return {
-      type: "tool_result",
-      result: {
-        role: "tool",
-        toolCallId: `call_${Math.random().toString(36).slice(2, 8)}`,
-        name: frame.name,
-        result: frame.result,
-      },
-    }
-  }
-  if (frame.kind === "done") return { type: "done", reason: "stop" }
-  return null
-}
-
-export function eventsForUserMessage(text: string): {
-  events: AgentEvent[]
-  delays: number[]
-} {
-  const frames = pickScript(text)
-  const events: AgentEvent[] = []
-  const delays: number[] = []
-  for (const f of frames) {
-    const ev = frameToEvent(f)
-    if (ev) {
-      events.push(ev)
-      delays.push(f.delay ?? 80)
-    }
-  }
-  return { events, delays }
 }

@@ -10,6 +10,7 @@ import {
   Layers01Icon,
   PuzzleIcon,
   Rocket01Icon,
+  UserIcon,
 } from "@hugeicons/core-free-icons"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -72,6 +73,11 @@ const PAGE_LINKS = [
   { href: "/#quickstart", label: "Quickstart" },
   { href: "/changelog", label: "Changelog" },
   { href: "https://docs.wisp.dev", label: "Docs", external: true },
+  {
+    href: "https://portfolio-nabiev-na.vercel.app/",
+    label: "Portfolio",
+    external: true,
+  },
 ]
 
 export function Nav() {
@@ -229,6 +235,17 @@ export function Nav() {
                 <span>K</span>
               </kbd>
             </button>
+
+            <a
+              href="https://portfolio-nabiev-na.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Author portfolio"
+              className="hidden h-9 items-center gap-1.5 rounded-full border border-border/60 px-3 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground md:inline-flex"
+            >
+              <HugeiconsIcon icon={UserIcon} size={14} strokeWidth={2} />
+              Portfolio
+            </a>
 
             <a
               href="https://github.com/Ali747711/wisp-web-ai-agent-integration"

@@ -31,7 +31,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       { kind: "added", text: "Default UI kit themed via CSS variables — works without Tailwind in the host app." },
       { kind: "added", text: "In-browser session memory + localStorage persistence adapter." },
     ],
-    commitUrl: "https://github.com/azamat/wisp/releases/tag/v0.1.0",
+    commitUrl: "https://github.com/Ali747711/wisp-web-ai-agent-integration/releases/tag/v0.1.0",
   },
   {
     version: "v0.0.7",
@@ -46,7 +46,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       { kind: "changed", text: "Streaming events renamed: token → delta, tool → tool-call, end → done." },
       { kind: "fixed", text: "Race condition where two tool calls in the same turn could overwrite each other's params." },
     ],
-    commitUrl: "https://github.com/azamat/wisp/releases/tag/v0.0.7",
+    commitUrl: "https://github.com/Ali747711/wisp-web-ai-agent-integration/releases/tag/v0.0.7",
   },
   {
     version: "v0.0.5",
@@ -61,7 +61,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       { kind: "added", text: "useChat hook with token-by-token streaming and stop/abort." },
       { kind: "changed", text: "AgentProvider now accepts a fetch override for tests and demos." },
     ],
-    commitUrl: "https://github.com/azamat/wisp/releases/tag/v0.0.5",
+    commitUrl: "https://github.com/Ali747711/wisp-web-ai-agent-integration/releases/tag/v0.0.5",
   },
   {
     version: "v0.0.3",
@@ -76,7 +76,7 @@ export const CHANGELOG: ChangelogEntry[] = [
       { kind: "added", text: "Auto-generated JSON Schema from Zod via zod-to-json-schema." },
       { kind: "fixed", text: "TypeScript inference now flows from params Zod schema into the handler signature." },
     ],
-    commitUrl: "https://github.com/azamat/wisp/releases/tag/v0.0.3",
+    commitUrl: "https://github.com/Ali747711/wisp-web-ai-agent-integration/releases/tag/v0.0.3",
   },
   {
     version: "v0.0.1",

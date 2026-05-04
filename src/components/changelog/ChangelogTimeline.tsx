@@ -77,7 +77,7 @@ export function ChangelogTimeline() {
                 asChild
               >
                 <a
-                  href="https://github.com/azamat/wisp/releases.atom"
+                  href="https://github.com/Ali747711/wisp-web-ai-agent-integration/releases.atom"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -92,7 +92,7 @@ export function ChangelogTimeline() {
                 asChild
               >
                 <a
-                  href="https://github.com/azamat/wisp/releases"
+                  href="https://github.com/Ali747711/wisp-web-ai-agent-integration/releases"
                   target="_blank"
                   rel="noreferrer"
                 >

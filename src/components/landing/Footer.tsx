@@ -31,6 +31,11 @@ const COLUMNS: FooterColumn[] = [
         href: "https://github.com/Ali747711/wisp-web-ai-agent-integration",
         external: true,
       },
+      {
+        label: "Portfolio",
+        href: "https://portfolio-nabiev-na.vercel.app/",
+        external: true,
+      },
     ],
   },
   {
@@ -112,7 +117,7 @@ export function Footer() {
           <p className="text-muted-foreground">
             © {new Date().getFullYear()} wisp · Made by{" "}
             <a
-              href="https://github.com/azamat"
+              href="https://portfolio-nabiev-na.vercel.app"
               target="_blank"
               rel="noreferrer"
               className="underline-offset-4 hover:text-foreground hover:underline"

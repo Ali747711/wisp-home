@@ -13,6 +13,7 @@ import {
   LinkSquare02Icon,
   Rocket01Icon,
   CommandIcon,
+  UserIcon,
 } from "@hugeicons/core-free-icons"
 import {
   CommandDialog,
@@ -113,6 +114,19 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
           >
             <HugeiconsIcon icon={LinkSquare02Icon} size={16} strokeWidth={2} />
             <span>npm package</span>
+          </CommandItem>
+          <CommandItem
+            onSelect={() => go("https://portfolio-nabiev-na.vercel.app/")}
+          >
+            <HugeiconsIcon icon={UserIcon} size={16} strokeWidth={2} />
+            <span>Author portfolio</span>
+            <CommandShortcut>
+              <HugeiconsIcon
+                icon={LinkSquare02Icon}
+                size={12}
+                strokeWidth={2}
+              />
+            </CommandShortcut>
           </CommandItem>
         </CommandGroup>
 

@@ -236,6 +236,56 @@
     mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   }
 
+  /* Conic-gradient border that slowly rotates around the agent launcher */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-spin-slow { animation: none; }
+  }
+
+  /* Three-dot streaming/thinking indicator */
+  @keyframes dot-bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-4px); opacity: 1; }
+  }
+  .dot-pulse > span {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background: var(--primary);
+    animation: dot-bounce 1.2s ease-in-out infinite;
+  }
+  .dot-pulse > span:nth-child(2) { animation-delay: 0.18s; }
+  .dot-pulse > span:nth-child(3) { animation-delay: 0.36s; }
+
+  /* Soft pulse halo for status dots */
+  @keyframes soft-ping {
+    0% { transform: scale(0.8); opacity: 0.7; }
+    70% { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+  .animate-soft-ping {
+    animation: soft-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  /* Slide-in for newly arrived chat messages */
+  @keyframes msg-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  .animate-msg-in {
+    animation: msg-in 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-msg-in { animation: none; }
+  }
+
   /* Hero animated radial gradient — primary tint blooms then settles */
   @keyframes hero-bloom {
     0%, 100% { opacity: 0.55; transform: translate3d(-2%, -1%, 0) scale(1); }
