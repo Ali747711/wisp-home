@@ -50,7 +50,7 @@ export function AuthorNote() {
               </div>
               <div className="ml-auto flex items-center gap-2">
                 <a
-                  href="https://portfolio-nabiev-na.vercel.app/"
+                  href="https://ali-pro.vercel.app/"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex h-8 items-center gap-1.5 rounded-full border border-border/60 px-2 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"

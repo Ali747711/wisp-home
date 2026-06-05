@@ -237,7 +237,7 @@ export function Nav() {
             </button>
 
             <a
-              href="https://portfolio-nabiev-na.vercel.app/"
+              href="https://ali-pro.vercel.app/"
               target="_blank"
               rel="noreferrer"
               aria-label="Author portfolio"
